@@ -75,7 +75,6 @@ texas_income <- texas_income %>%
     MOE = estimateM
   )
 
-
 # We now need to visualize the margins of error to understand the uncertainty around these estimates. Because TX is such a huge state, filter the data to include only the top 10 and bottom 10 counties based on the median household income before plotting it.
 top_bottom_20 <- texas_income %>%
   arrange(desc(estimate)) %>%
@@ -87,7 +86,6 @@ length(top_bottom_20$county)
 
 # Display the first few rows of the data frame to ensure it looks correct
 head(top_bottom_20)
-
 
 # Assuming your data frame is named 'top_bottom_20'
 top_bottom_20_clean <- top_bottom_20 %>%
@@ -103,8 +101,6 @@ ggplot(top_bottom_20, aes(x = estimate, y = reorder(county, estimate))) +
        y = "", 
        color = "Year") + 
   scale_x_continuous(labels = label_dollar())
-
-
 
 # Arrange in descending order by margin of error
 # For counties with smaller population sizes, estimates are likely to have a larger margin of error compared to those with larger baseline populations.
