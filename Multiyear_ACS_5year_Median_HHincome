@@ -8,7 +8,32 @@ library("pacman")
 p_load(dplyr, ggplot2, scales, tidyverse, tidycensus)
 
 # Census Data API Key (enter your Census Data API Key between the parentheses)
-census_api_key("581e11f28630d5911ef4cc16559d23128533046a")
+census_api_key("ENTER_YOUR_CENSUS_API_KEY_HERE")
+
+yrs <- 2011:2023
+table_name <- "B19013A_001"
+
+# Load variables for each year and check for the specific table
+table_check <- sapply(yrs, function(year) {
+  vars <- load_variables(year, "acs5", cache = TRUE)
+  table_name %in% vars$variable
+})
+
+# Create a data frame to summarize the results
+table_check_df <- data.frame(
+  year = yrs,
+  table_exists = table_check
+)
+
+# Print the results
+print(table_check_df)
+
+# Check if the table is present in all years
+if (all(table_check)) {
+  print(paste("The table", table_name, "is present in all years from 2011 to 2023."))
+} else {
+  print(paste("The table", table_name, "is not present in all years from 2011 to 2023."))
+}
 
 # Load variables for the latest "acs5"
 v23 <- load_variables(2023, "acs5", cache = TRUE)
