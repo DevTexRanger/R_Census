@@ -102,4 +102,4 @@ ggplot(top_bottom_20, aes(x = estimate, y = reorder(county, estimate))) +
   scale_x_continuous(labels = label_dollar())
 
 # Save the output 'df' as a CSV file; if on Windows, remember to use double backslashes (\\) as a directory separator in file paths 
-write.csv(texas_income, "C:\\Users\\rafae\\OneDrive\\texasincome.csv")
+write.csv(texas_income, "...\\texasincome.csv")
