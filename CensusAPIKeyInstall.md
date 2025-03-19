@@ -1,0 +1,64 @@
+## Set the API Key for the Current Session
+
+To ensure that your Census API key is saved to your R environment and persists across sessions, follow these steps:
+
+```         
+library(tidycensus)
+
+census_api_key("YOUR_API_KEY", install = FALSE)
+```
+
+## Save the API Key for Future Sessions
+
+To ensure that your API key is saved and automatically loaded in future R sessions, run:
+
+```         
+
+census_api_key("YOUR_API_KEY", install = TRUE)
+```
+
+## Verify the API Key is Saved
+
+After setting the key using install `= TRUE`, restart your R session and check if the key is correctly loaded with:
+
+```         
+
+Sys.getenv("CENSUS_API_KEY")
+```
+
+If it prints your API key, it is correctly saved.
+
+## Manually Add the API Key to .Renviron (If Needed)
+
+If the automatic method does not work, you can manually add your API key to the `.Renviron` file:
+
+```         
+file.edit("~/.Renviron")
+```
+
+Add this line to the file:
+
+```         
+CENSUS_API_KEY=YOUR_API_KEY
+```
+
+Save and close the file.
+
+Restart R and check if it's loaded with:
+
+```         
+Sys.getenv("CENSUS_API_KEY")
+```
+
+## Load the API Key in Your Scripts
+
+If you saved the key in `.Renviron`, you can load it in your R scripts like this:
+
+```         
+library(tidycensus)
+
+readRenviron("~/.Renviron")  # Ensures the key is loaded
+census_api_key(Sys.getenv("CENSUS_API_KEY"), install = FALSE)
+```
+
+Now your API key should be available for use in all sessions.
